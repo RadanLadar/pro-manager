@@ -1,0 +1,4 @@
+1) Add a new invoice\! v) Config\!
+2) Invoice full list\!  \!
+3) Search into the DB\! q) Quit\!
+
