@@ -27,7 +27,7 @@ while [ choice != "q" ]
 do # Everything below must be reload for update
 
 # Import VAT value
-vatVal=$(cat vat.txt)
+vatVal=$(cat $path/vat.txt)
 
 # Header
 figlet invoice
@@ -87,8 +87,10 @@ echo -------------------------------------------------------------
 			((index=index+1))
 			echo $index > $path/index.txt
 			# Add the infos at the bottom of the db file
-			
-			echo $index\! $customername\! $missiontype\! $vatAdded\! $vat >> $path/invoicesdb.csv
+			numinv=$(./numgen.sh)
+			echo The reference of the invoice is $numinv
+			echo ""
+			echo $index\! $customername\! $missiontype\! $vatAdded\! $vat\! $numinv >> $path/invoicesdb.csv
 			echo Invoice added successfully!
 			;;
 		2)
@@ -139,6 +141,10 @@ echo -------------------------------------------------------------
 							y)
 								echo "0" > $path/index.txt
 								echo "" > $path/invoicesdb.csv
+								echo "000" > $path/q1.txt
+								echo "000" > $path/q2.txt
+								echo "000" > $path/q3.txt
+								echo "000" > $path/q4.txt
 								echo All data erased!
 								;;
 							n)
