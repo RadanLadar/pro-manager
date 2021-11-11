@@ -74,6 +74,7 @@ echo -------------------------------------------------------------
 						;;
 					n)
 						vatAdded=$price
+						vat=""
 						echo ""
 						echo Full price is $vatAdded
 						;;
@@ -87,10 +88,10 @@ echo -------------------------------------------------------------
 			((index=index+1))
 			echo $index > $path/index.txt
 			# Add the infos at the bottom of the db file
-			numinv=$(./numgen.sh)
+			numinv=$($path/numgen.sh)
 			echo The reference of the invoice is $numinv
 			echo ""
-			echo $index\! $customername\! $missiontype\! $vatAdded\! $vat\! $numinv >> $path/invoicesdb.csv
+			echo $index\!$customername\!$missiontype\!$price\!$vatAdded\!$vat\!$numinv >> $path/invoicesdb.csv
 			echo Invoice added successfully!
 			;;
 		2)
@@ -108,6 +109,9 @@ echo -------------------------------------------------------------
 			
 			# Display results
 			column -t -s '\!' $path/header.csv $path/srcresult.txt	
+			;;
+		4)
+			$path/line-edit.sh
 			;;
 		v)
 			echo ..........................CONFIG.............................
