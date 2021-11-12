@@ -64,7 +64,7 @@ fi
 
 # write into a temporary file
 
-sed "${_id}s/.*/$lineid\!$newname\!$newtype\!$newprice\!$newvalue\!$newvat\!$invoicenum/" $path/invoicesdb.csv > $path/tempdb.csv
+sed "${_id}s/.*/$lineid\!${newname^^}\!${newtype^^}\!$newprice\!$newvalue\!$newvat\!$invoicenum/" $path/invoicesdb.csv > $path/tempdb.csv
 
 # replace the old file with the new one
 mv $path/invoicesdb.csv $path/invoices.old.csv

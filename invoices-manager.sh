@@ -48,7 +48,7 @@ echo -------------------------------------------------------------
 read -p 'Your choice: ' choice
 echo -------------------------------------------------------------
 	# Processing the choice
-	case $choice in
+	case ${choice,,} in
 		1)
 			# Get the index from a file 
 			index=$(cat $path/index.txt)
@@ -62,7 +62,7 @@ echo -------------------------------------------------------------
 			read -p 'VAT appliable? (y/n): ' isVat
 				
 				# Include VAT if needed
-				case $isVat in
+				case ${isVat,,} in
 					y)	
 						# Compute variables		
 						vatAdded=`echo "$vatVal * $price" | bc`
@@ -91,18 +91,20 @@ echo -------------------------------------------------------------
 			numinv=$($path/numgen.sh)
 			echo The reference of the invoice is $numinv
 			echo ""
-			echo $index\!$customername\!$missiontype\!$price\!$vatAdded\!$vat\!$numinv >> $path/invoicesdb.csv
+			echo $index\!${customername^^}\!${missiontype^^}\!$price\!$vatAdded\!$vat\!$numinv >> $path/invoicesdb.csv
 			echo Invoice added successfully!
 			;;
+		# DISPLAY THE FULL LIST
 		2)
 			echo ""
 			echo .......................FULL LIST.............................
 			column -t -s '\!' $path/header.csv $path/invoicesdb.csv
 			;;
+		# SEARCH FEATURE
 		3)
 			read -p 'Search... ' srcvar
 			while IFS= read -r line; do
-				if [[ "$line" == *"$srcvar"* ]]; then
+				if [[ "$line" == *"${srcvar^^}"* ]]; then
 					printf '%s\n' "$line" >> $path/srcresult.txt
 				fi
 			done < $path/invoicesdb.csv 
@@ -128,7 +130,7 @@ echo -------------------------------------------------------------
 			echo r\) RESET ALL	
 			echo ""
 			read -p 'Access config num ' conf
-				case $conf in
+				case ${conf,,} in
 					1) 
 						read -p 'Type your local VAT value (float) ' vatConf
 						echo $vatConf > $path/vat.txt
@@ -141,7 +143,7 @@ echo -------------------------------------------------------------
 						;;
 					r)
 						read -p 'Do you really want to erase all data? (y/n) ' reset
-						case $reset in 
+						case ${reset,,} in 
 							y)
 								echo "0" > $path/index.txt
 								echo "" > $path/invoicesdb.csv
@@ -152,12 +154,12 @@ echo -------------------------------------------------------------
 								echo All data erased!
 								;;
 							n)
-echo Aborted!
-;;
-*)
-echo -n 'Wrong input'
-;;
-esac
+								echo Aborted!
+								;;
+							*)
+								echo -n 'Wrong input'
+								;;
+						esac
 						;;
 					*)
 						echo Wrong input
@@ -169,22 +171,7 @@ esac
 			exit
 			;;
 
-		r)
-			read -p 'Do you really want to erase data? (y/n) ' reset
-				case $reset in
-					y)
-						echo "0" > $path/index.txt
-						echo "" > $path/invoicesdb.csv
-						echo All data erased!
-						;;
-					n)
-						echo Aborted!
-						;;
-					*)
-						echo -n 'Wrong input'
-						;;
-				esac
-			;;
+
 		*) 
 			echo -n 'Wrong choice' 
 			;;
