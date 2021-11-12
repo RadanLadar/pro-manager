@@ -29,6 +29,9 @@ do # Everything below must be reload for update
 # Import VAT value
 vatVal=$(cat $path/vat.txt)
 
+# Import deadline
+dl=$(cat $path/dl.txt)
+
 # Header
 figlet invoice
 figlet manager
@@ -42,6 +45,9 @@ echo -------------------------------------------------------------
 echo ""
 column -t -s '\!' $path/menu.txt
 echo ""
+
+# Import alert script
+$path/alert.sh
 
 # Get the choice 
 echo -------------------------------------------------------------
@@ -124,6 +130,9 @@ echo -------------------------------------------------------------
 		        echo '---> ' 
 			column -t -s '\!' $path/header.csv
 			echo ""
+			echo 3\) Deadline
+			echo '---> '$dl
+			echo ""
 			echo b\) BACK
 			echo ""
 			echo _______________
@@ -138,6 +147,10 @@ echo -------------------------------------------------------------
 					2)
 						echo This config is not available yet
 						;;
+					3)
+						read -p 'Type the new digits for the deadline date ' dlConf
+						echo $dlConf > $path/dl.txt
+						;;
 					b)
 						echo "Back to main menu"
 						;;
@@ -151,6 +164,7 @@ echo -------------------------------------------------------------
 								echo "000" > $path/q2.txt
 								echo "000" > $path/q3.txt
 								echo "000" > $path/q4.txt
+								echo "" > $path/dl.txt
 								echo All data erased!
 								;;
 							n)
