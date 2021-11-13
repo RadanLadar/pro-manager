@@ -35,24 +35,19 @@ dl=$(cat $path/dl.txt)
 # Header
 figlet invoice
 figlet manager
-echo "[v0.1]"
-echo -------------------------------------------------------------
 
 # Display entry choice
-
-echo What do you want to do ?
-echo -------------------------------------------------------------
 echo ""
-column -t -s '\!' $path/menu.txt
+cat $path/menu.txt
 echo ""
 
 # Import alert script
 $path/alert.sh
 
-# Get the choice 
-echo -------------------------------------------------------------
+# Get the choice
 read -p 'Your choice: ' choice
-echo -------------------------------------------------------------
+echo ---------------------------------------------------------
+echo ""
 	# Processing the choice
 	case ${choice,,} in
 		1)
@@ -187,6 +182,7 @@ echo -------------------------------------------------------------
 
 
 		*) 
+
 			echo -n 'Wrong choice' 
 			;;
 	esac

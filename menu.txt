@@ -1,3 +1,7 @@
-1) Add a new invoice\! 4) Edit a line\!
-2) Invoice full list\! v) Config\!
-3) Search into the DB\! q) Quit\!
+┌──────────────┤ What do you want to do? ├──────────────┐
+│                                                       │
+│    1) Add a new invoice         4) Edit a line        │
+│    2) Invoice full list         v) Config             │
+│    3) Search into the DB        q) Quit               │
+│                                                       │
+└───────────────────────────────────────────┤▒[v0.2]░├──┘
