@@ -40,8 +40,9 @@ case ${isVat,,} in
 	n)
 		vatAdded=$price
 		vat=""
-		echo ""
-		echo Full price is $vatAdded
+		echo '╓──────────────────┬────────────────────────────────────┐'
+		echo '║ Full price is    │' $vatAdded 
+		echo '║──────────────────┼────────────────────────────────────┤'
 		;;
 	*)
 		echo ""
@@ -57,6 +58,6 @@ echo $index > $path/index.txt
 numinv=$($path/numgen.sh)
 echo '║ Invoice ref.     │' $numinv
 echo '║──────────────────┴────────────────────────────────────┤'
-echo $index\!${customername^^}\!${missiontype^^}\!$price\!$vatAdded\!$vat\!$numinv >> $path/invoicesdb.csv
+echo '│'\!$index\!'│'\!${customername^^}\!'│'\!${missiontype^^}\!'│'\!$price\!'│'\!$vatAdded\!'│'\!$vat\!'│'\!$numinv\!'│' >> $path/invoicesdb.csv
 echo '║ Invoice added successfully!                           │'
 echo '╙───────────────────────────────────────────────────────┘'

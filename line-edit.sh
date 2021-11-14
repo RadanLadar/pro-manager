@@ -18,13 +18,15 @@ _id=$((id + 1))
 line=$(sed "${_id}!d" $path/invoicesdb.csv)
 
 # turn old data into vars
-lineid="${line%%!*}"
-invoicenum="${line##*!}"
-oldname=$(echo $line | cut -d '!' -f2 )
-oldtype=$(echo $line | cut -d '!' -f3 )
-oldprice=$(echo $line | cut -d '!' -f4 )
-oldvalue=$(echo $line | cut -d '!' -f5 )
-oldvat=$(echo $line | cut -d '!' -f6 )
+#lineid="${line%%!*}"
+#invoicenum="${line##*!}"
+lineid=$(echo $line | cut -d '!' -f2 )
+oldname=$(echo $line | cut -d '!' -f4 )
+oldtype=$(echo $line | cut -d '!' -f6 )
+oldprice=$(echo $line | cut -d '!' -f8 )
+oldvalue=$(echo $line | cut -d '!' -f10 )
+oldvat=$(echo $line | cut -d '!' -f12 )
+invoicenum=$(echo $line | cut -d '!' -f14 )
 
 # Get input for data update
 
@@ -64,7 +66,7 @@ fi
 
 # write into a temporary file
 
-sed "${_id}s/.*/$lineid\!${newname^^}\!${newtype^^}\!$newprice\!$newvalue\!$newvat\!$invoicenum/" $path/invoicesdb.csv > $path/tempdb.csv
+sed "${_id}s/.*/│\!$lineid\!│\!${newname^^}\!│\!${newtype^^}\!│\!$newprice\!│\!$newvalue\!│\!$newvat\!│\!$invoicenum\!│/" $path/invoicesdb.csv > $path/tempdb.csv
 
 # replace the old file with the new one
 mv $path/invoicesdb.csv $path/invoices.old.csv

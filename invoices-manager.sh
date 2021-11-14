@@ -56,8 +56,7 @@ case ${choice,,} in
 		;;
 		# DISPLAY THE FULL LIST
 	2)
-		echo ""
-		echo .......................FULL LIST.............................
+		echo ┌──────┬───────────────────────╢ FULL LIST ╟────────────────────────────────┐
 		column -t -s '\!' $path/header.csv $path/invoicesdb.csv
 		;;
 	# SEARCH FEATURE
@@ -70,13 +69,15 @@ case ${choice,,} in
 		done < $path/invoicesdb.csv 
 		
 		# Display results
+
+		echo ┌──────┬───────────────────────╢ RESULTS ╟────────────────────────────────┐
 		column -t -s '\!' $path/header.csv $path/srcresult.txt	
 		;;
 	4)
 		$path/line-edit.sh
 		;;
 	v)
-		echo ..........................CONFIG.............................
+		echo ┌───────────────────────╢ CONFIG ╟──────────────────────
 		echo 1\) VAT value
 		echo '---> '$vatVal
 		echo ""
