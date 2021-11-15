@@ -29,10 +29,16 @@ oldvat=$(echo $line | cut -d '!' -f12 )
 invoicenum=$(echo $line | cut -d '!' -f14 )
 
 # Get input for data update
+echo '┌───────────────────────────────────────────────────────┐'
+read -p "│ New NAME ($oldname) ▒ " name
+echo '├───────────────────────────────────────────────────────┤'
+read -p "│ New TYPE ($oldtype) ▒ " missiontype
+echo '├───────────────────────────────────────────────────────┤'
+read -p "│ New PRICE ($oldprice) ▒ " price
 
-read -p "New NAME ($oldname) " name
-read -p "New TYPE ($oldtype) " missiontype
-read -p "New PRICE ($oldprice) " price
+echo '├───────────────────────────────────────────────────────┤'
+echo '│ Line edited successfully!                             │'
+echo '└───────────────────────────────────────────────────────┘'
 
 # process input
 
