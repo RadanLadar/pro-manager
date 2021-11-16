@@ -19,6 +19,8 @@ read -p '│ Type of mission: │ ' missiontype
 echo    ├──────────────────┼────────────────────────────────────┤
 read -p '│ Contract price:  │ ' price
 echo    ├──────────────────┼────────────────────────────────────┤
+read -p '│ Payment duee:    │ ' dl
+echo    ├──────────────────┼────────────────────────────────────┤
 read -p '│ VAT? (y/n):      │ ' isVat
 echo    └──────────────────┴────────────────────────────────────┘
 		
@@ -58,6 +60,6 @@ echo $index > $path/index.txt
 numinv=$($path/numgen.sh)
 echo '║ Invoice ref.     │' $numinv
 echo '║──────────────────┴────────────────────────────────────┤'
-echo '│'\!$index\!'│'\!${customername^^}\!'│'\!${missiontype^^}\!'│'\!$price\!'│'\!$vatAdded\!'│'\!$vat\!'│'\!$numinv\!'│' >> $path/invoicesdb.csv
+echo '│'\!$index\!'│'\!${customername^^}\!'│'\!${missiontype^^}\!'│'\!$price\!'│'\!$vatAdded\!'│'\!$vat\!'│'\!$numinv\!'│'\!$dl >> $path/invoicesdb.csv
 echo '║ Invoice added successfully!                           │'
 echo '╙───────────────────────────────────────────────────────┘'
